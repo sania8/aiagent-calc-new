@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Math Solver</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        .container { display: flex; justify-content: space-between; }
+        .column { width: 45%; padding: 20px; border: 1px solid #ddd; border-radius: 10px; }
+        input, button { padding: 10px; margin: 10px; font-size: 16px; width: 80%; }
+        h2 { font-size: 24px; font-weight: bold; }
+        ol { text-align: left; display: inline-block; }
+        #graph_section { margin-top: 20px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>AI-Powered Math Solver</h1>
+
+    <div class="container">
+        <!-- Left Side: Expression Solver -->
+        <div class="column">
+            <h2>Solve Expressions</h2>
+            <form method="POST">
+                <input type="text" name="expression" placeholder="Enter math expression (e.g., x**2 + 3*x + 2)" required>
+                <button type="submit">Solve</button>
+            </form>
+            {% if result %}
+                <div>{{ result | safe }}</div>
+            {% endif %}
+        </div>
+
+        <!-- Right Side: Equation Solver + Graph -->
+        <div class="column">
+            <h2>Solve Equations</h2>
+            <form method="POST">
+                <input type="text" name="equation" id="equation_input" placeholder="Enter equation (e.g., 3*x + 5 = 11)" required>
+                <button type="submit">Solve for x</button>
+            </form>
+            {% if equation_result %}
+                <h2>Solution:</h2>
+                <p>{{ equation_result }}</p>
+
+                <!-- Graph & Explanation -->
+                {% if graph_img %}
+                <div id="graph_section">
+                    <h3>Graph:</h3>
+                    <img src="data:image/png;base64,{{ graph_img }}" alt="Equation Graph">
+                    <h3>Graph Explanation:</h3>
+                    <p>{{ graph_explanation }}</p>
+                </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
